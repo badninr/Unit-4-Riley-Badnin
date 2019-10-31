@@ -30,6 +30,16 @@ public class Coin{
   This is the section of the class containing the methods (behanviors) of a Coin
   */
 
+  //The accessor method for the face variable (a getter)
+  public int getFace(){
+    return face;
+  }
+
+  //The mutator method for the face variable (a setter) *Setters are always void
+  public void setFace(int faceInput){
+    face = faceInput;
+  }
+
   //The flip method assigns a randomly chosen value to the face of the Coin
   public void flip(){
     face = (int) (Math.random() * 2);
