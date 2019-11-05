@@ -48,15 +48,15 @@ public class Car {
     return amtFuel;
   }
 
-  //setters
+  //Methods
   public void fillTank(){
-    amtFuel = carTankSize;
+    amtFuel = tankSize;
   }
 
   public void drive(double distanceDrove){
     amtFuel = amtFuel - (distanceDrove/mpg);
     if (amtFuel <= 0){
-  
+      System.out.println("You're out of gas!");
     }
   }
 
@@ -71,6 +71,7 @@ public class Car {
     result += "Make: " + make + ", Model: " + model + "\n";
     result += "MPG: " + mpg + ", Tank Size: " + tankSize + "\n";
     result += "Current Amount of Fuel: " + amtFuel;
+    return result;
   }
 
 
