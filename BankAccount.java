@@ -5,45 +5,80 @@ public class BankAccount {
   //----------------------------------------------------------------------------
 
   //Variables
-  private double balance;
+  private double checkingBalance;
+  private double savingsBalance;
+  private String name;
+  private int accountNum;
+  private double interestRate;
+
 
   //----------------------------------------------------------------------------
 
   //Constructor
   public BankAccount() {
-    balance = 10000.0;
+    checkingBalance = 5000.0;
+    savingsBalance = 10000.0;
+    accountNum = (int)((Math.random()*100000)+100000);
+    interestRate = 1.09;
   }
 
   //----------------------------------------------------------------------------
 
   //Getters
-  public double getBalance(){
-    return balance;
+  public double getCheckingBalance(){
+    return checkingBalance;
+  }
+
+  public double getSavingsBalance(){
+    return savingsBalance;
   }
 
   //----------------------------------------------------------------------------
 
   //Decimal format for money
-  DecimalFormat money = new DecimalFormat ("######0.00");
+  DecimalFormat money = new DecimalFormat ("#,###,###,###,###,###,##0.00");
 
   //----------------------------------------------------------------------------
 
   //Methods
-  public void withdrawl(double withdrawlAmt){
-    balance = balance - withdrawlAmt;
-    System.out.println("You made a withdrawl of $" + money.format(withdrawlAmt) + ".");
-    if (balance < 0){
+  public void savingsWithdrawl(double savingsWithdrawlAmt){
+    savingsBalance = savingsBalance - savingsWithdrawlAmt;
+    System.out.println("You made a savings withdrawl of $" + money.format(savingsWithdrawlAmt) + ".");
+    if (savingsBalance < 0){
       System.out.println("You're now in debt.");
     }
   }
 
-  public void deposit(double depositAmt){
-    balance = balance - depositAmt;
-    System.out.println("You made a deposit of $" + money.format(depositAmt) + ".");
+  public void savingsDeposit(double savingsDepositAmt){
+    savingsBalance = savingsBalance + savingsDepositAmt;
+    System.out.println("You made a savings deposit of $" + money.format(savingsDepositAmt)
+     + ". After interest, your new savings balance is $" + (savingsBalance*interestRate) + ".");
+    savingsBalance = savingsBalance*interestRate;
+  }
+
+  public void checkingWithdrawl(double checkingWithdrawlAmt){
+    checkingBalance = checkingBalance - checkingWithdrawlAmt;
+    System.out.println("You made a checking withdrawl of $" + money.format(checkingWithdrawlAmt) + ".");
+    if (checkingBalance < 0){
+      System.out.println("You're now in debt.");
+    }
+  }
+
+  public void checkingDeposit(double checkingDepositAmt){
+    checkingBalance = checkingBalance + checkingDepositAmt;
+    System.out.println("You made a checking deposit of $" + money.format(checkingDepositAmt) + ".");
+  }
+
+  public void setName(String nameInput){
+    name = nameInput;
   }
 
   public String toString(){
-    String balanceReport = "Your current balance is $" + money.format(balance) + ".";
+    String balanceReport = "------------------------------\nAccount name: " + name +
+    " \nAccount number: " + accountNum +
+     "\nCurrent checking balance: $" + money.format(checkingBalance) +
+     "\nCurrent savings balance: $" + money.format(savingsBalance) +
+     "\n------------------------------";
     return balanceReport;
   }
 
